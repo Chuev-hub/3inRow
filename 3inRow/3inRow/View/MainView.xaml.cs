@@ -23,6 +23,7 @@ namespace _3inRow
         public MainView()
         {
             InitializeComponent();
+            
         }
     }
 }

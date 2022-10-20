@@ -6,13 +6,17 @@
         xmlns:vm="clr-namespace:_3inRow.ViewModel"
         xmlns:local="clr-namespace:_3inRow"
         mc:Ignorable="d" 
-        Title="View" Width="500" Height="590">
+        Title="View" Width="500" Height="690">
 
     <Window.DataContext>
         <vm:MainViewModel></vm:MainViewModel>
     </Window.DataContext>
     <Grid Background="#FF6B6B6B">
-            <DataGrid Margin="0"  
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+            <DataGrid x:Name="DGrid" Grid.Row="0"  Margin="0"  
                       
                       ItemsSource="{Binding Data}" 
                       CanUserAddRows="False" 
@@ -21,5 +25,8 @@
                       ColumnHeaderHeight="0"
                       CanUserReorderColumns="False"
                       CanUserSortColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="42" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalScrollBarVisibility="Visible"/>
+                   
+        <Button Content="START!" Width="100"  Height="25" Command="{Binding Start}" Grid.Row="1" />
+                    <Label Content="{Binding CongrText}" Grid.Row="1" Margin="28,15,349,15" Background="#00D0E0BD" Foreground="#FF71FF00" ></Label>
     </Grid>
 </Window>
