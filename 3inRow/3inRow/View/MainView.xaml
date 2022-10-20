@@ -1,0 +1,25 @@
+﻿<Window x:Class="_3inRow.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:_3inRow.ViewModel"
+        xmlns:local="clr-namespace:_3inRow"
+        mc:Ignorable="d" 
+        Title="View" Width="500" Height="590">
+
+    <Window.DataContext>
+        <vm:MainViewModel></vm:MainViewModel>
+    </Window.DataContext>
+    <Grid Background="#FF6B6B6B">
+            <DataGrid Margin="0"  
+                      
+                      ItemsSource="{Binding Data}" 
+                      CanUserAddRows="False" 
+                      CanUserDeleteRows="False" 
+                      ColumnWidth="50"
+                      ColumnHeaderHeight="0"
+                      CanUserReorderColumns="False"
+                      CanUserSortColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="42" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalScrollBarVisibility="Visible"/>
+    </Grid>
+</Window>
