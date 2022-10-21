@@ -24,7 +24,8 @@ namespace _3inRow.ViewModel
 {
     class MainViewModel : BaseNotifyPropertyChanged
     {
-        private Random random { get; set; } = new Random();
+        private Random random { get; set; }
+
         private DataTable _data;
         public DataTable Data
         {
@@ -35,6 +36,7 @@ namespace _3inRow.ViewModel
                 Notify();
             }
         }
+
         private string congrText;
         public string CongrText
         {
@@ -46,9 +48,15 @@ namespace _3inRow.ViewModel
             }
         }
 
-
         private string[,] numbers = new string[9, 9];
         public ICommand Start { get; set; }
+        public MainViewModel()
+        {
+            random = new Random();
+            Data = new DataTable();
+            InitCommands();
+            InitGrid();
+        }
         private void Print()
         {
             for (int i = 0; i < 9; i++)
@@ -59,23 +67,22 @@ namespace _3inRow.ViewModel
                     Data.Rows[i].ItemArray = a;
                 }
         }
-
-        public MainViewModel()
+        private void InitCommands()
         {
             Start = new RelayCommand(async x =>
             {
-                while (true)
+                do
                 {
                     await CheckHorizontal();
                     await Task.Delay(1000);
                     await CheckVertical();
-                    if (IsDone())
-                        break;
-                }
-                CongrText = "Done!!!";
+                } while (!IsDone()) ;
 
+                CongrText = "Done!!!";
             });
-            Data = new DataTable();
+        }
+        private void InitGrid()
+        {
             for (int i = 0; i < 9; i++)
                 Data.Rows.Add();
 
@@ -95,15 +102,14 @@ namespace _3inRow.ViewModel
                     a[j] = numbers[i, j];
                     Data.Rows[i].ItemArray = a;
                 }
-
         }
-        
         private bool IsDone()
         {
             for (int i = 8; i > -1; i--)
             {
                 for (int j = 0; j < 7; j++)
-                    if (numbers[i, j] == numbers[i, j + 1] && numbers[i, j + 2] == numbers[i, j + 1])
+                    if (numbers[i, j] == numbers[i, j + 1] &&
+                        numbers[i, j + 2] == numbers[i, j + 1])
                         return false;
             }
             return true;
@@ -150,11 +156,10 @@ namespace _3inRow.ViewModel
                         };
 
                         isFalled = true;
-                        await ShowThree(itm);
+                        await ShowThreeNums(itm);
                         Fall(itm);
                         Print();
                         await Task.Delay(400);
-
                         break;
                     }
                 if (!isFalled)
@@ -184,7 +189,7 @@ namespace _3inRow.ViewModel
                         };
 
                         isFalled = true;
-                        await ShowThree(itm);
+                        await ShowThreeNums(itm);
                         Fall(itm);
                         Print();
                         await Task.Delay(400);
@@ -196,7 +201,7 @@ namespace _3inRow.ViewModel
 
             }
         }
-        private async Task ShowThree(ThreeNumItem item)
+        private async Task ShowThreeNums(ThreeNumItem item)
         {
             if (item.IsHorizontal)
             {
@@ -253,24 +258,6 @@ namespace _3inRow.ViewModel
             }
 
         }
-        ////public ICommand AZCommand { get; private set; }
-
-        //public ObservableCollection<Item> Cars { get; set; } = new ObservableCollection<Item>();
-        //public MainViewModel()
-        //{
-        //    InitCommands();
-        //    Window.
-        //}
-
-        //private void InitCommands()
-        //{
-
-        //    //    ImportCommand = new RelayCommand(x =>
-        //    //    {
-
-
-
-        //    //    });
-        //}
+       
     }
 }
