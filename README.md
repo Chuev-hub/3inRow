@@ -7,6 +7,7 @@ This is an application that shows you a matrix 9*9 with different numbers. When 
 - WPF C#
 - MVVM
 
+
 ## Stack description 💻
 
 MVVM (Model View View-Model) software design pattern is used here.
